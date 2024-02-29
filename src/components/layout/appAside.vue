@@ -47,7 +47,7 @@ import type { setBlockTracking } from 'vue';
 </template>
 
 <script setup lang="ts">
-const isCollapse = ref(false)
+import { isCollapse } from './isCollapse'
 </script>
 
 <style lang="scss" scoped>
