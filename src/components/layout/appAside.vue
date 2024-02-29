@@ -52,12 +52,12 @@ import { isCollapse } from './isCollapse'
 
 <style lang="scss" scoped>
 .el-aside {
-  background-color: #eee;
+  background-color: #e9e9eb;
   height: 100vh;
   width: auto;
 }
 .el-menu {
-  background-color: #eee;
+  background-color: #e9e9eb;
   border-right: none;
   width: 200px;
   &.el-menu--collapse {

@@ -4,7 +4,12 @@
       <appAside />
       <el-container class="header-and-main">
         <appHeader />
-        <el-main>Main</el-main>
+        <el-main>
+          <el-scrollbar>
+            <!-- 路由出口 -->
+            <RouterView />
+          </el-scrollbar>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -18,5 +23,10 @@ import appHeader from './appHeader.vue'
 <style lang="scss" scoped>
 .header-and-main {
   flex-direction: column; //整体垂直显示
+  height: 100vh;
+}
+.el-main {
+  background-color: #f4f4f5;
+  padding-right: 0;
 }
 </style>

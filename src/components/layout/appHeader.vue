@@ -41,9 +41,12 @@ import { isCollapse } from './isCollapse'
 .el-header {
   display: flex;
   align-items: center;
-  background-color: #eee;
+  background-color: #dedfe0;
   .el-icon {
     margin-right: 17px;
+    :hover {
+      color: #409eff;
+    }
   }
 }
 .el-dropdown {
