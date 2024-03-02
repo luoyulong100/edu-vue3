@@ -15,18 +15,15 @@
     <!-- 下拉菜单 -->
     <el-dropdown>
       <span class="el-dropdown-link">
-        <el-avatar
-          :size="32"
-          :src="'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'"
-        />
+        <el-avatar :size="32" :src="userInfo.portrait" />
         <el-icon class="el-icon--right">
           <IEpArrow-down />
         </el-icon>
       </span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item>用户姓名</el-dropdown-item>
-          <el-dropdown-item divided>退出</el-dropdown-item>
+          <el-dropdown-item>{{ userInfo.userName }}</el-dropdown-item>
+          <el-dropdown-item divided @click="handleUserLogout">退出</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>
@@ -34,7 +31,45 @@
 </template>
 
 <script setup lang="ts">
+import { useTokenStore } from '@/stores/myToken'
+import { getInfo, userLogout } from '@/aip/users'
 import { isCollapse } from './isCollapse'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const store = useTokenStore()
+const userInfo = ref({ portrait: '', userName: '' })
+
+//用户数据
+const isGetInfo = () => {
+  getInfo().then((res) => {
+    userInfo.value = res.data.content
+  })
+}
+
+//退出登录
+const handleUserLogout = async () => {
+  await ElMessageBox.confirm('确认登出？', '退出询问', {
+    confirmButtonText: '确认',
+    cancelButtonText: '取消',
+    type: 'warning'
+  })
+    .then(() => {
+      userLogout()
+      store.saveToken('')
+      router.push({ name: 'Login' })
+      ElMessage.success('已退出！')
+    })
+    .catch(() => {
+      console.log('111')
+
+      return new Promise(() => {})
+    })
+}
+
+onMounted(() => {
+  isGetInfo()
+})
 </script>
 
 <style scoped lang="scss">
